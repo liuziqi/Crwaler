@@ -17,9 +17,13 @@ if __name__ == '__main__':
 
     code_im = requests.get(url=code_url, headers=headers).content
     code = VCR().PostPic(im=code_im, codetype=1902)['pic_str']
-    print('code: ', code)
+    print('code:', code)
+
+    with open('./Resrc/code_im.jpg', 'wb') as fp:
+        fp.write(code_im)
 
     login_url = 'https://so.gushiwen.cn/user/login.aspx?from=http%3a%2f%2fso.gushiwen.cn%2fuser%2fcollect.aspx'
+
     params = {
         '__VIEWSTATE': '76C9TVjnJz+VuVOIpvbDa6FR8mNKSq/SR46/O8/xsGZd6bDEZZnSt2ujbbLg/04i/cBF56i4owXymZpp3WXcr5iu9bdd3b5kEXT5mbLTru6Q5wzjNIlvuG2JaPw=',
         '__VIEWSTATEGENERATOR': 'C93BE1AE',
@@ -29,9 +33,15 @@ if __name__ == '__main__':
         'code': code,
         'denglu': '登录'
     }
-    response = requests.post(url=url, headers=headers, params=params)
-    xml = response.text
-    print('status code: ', response.status_code)
 
+    response = requests.post(url=login_url, headers=headers, params=params)
+    print('status code:', response.status_code)
+
+    # 个人中心页面
+    me_url = 'https://so.gushiwen.cn/user/collect.aspx'
+    response = requests.get(url=me_url, headers=headers)
+    xml = response.text
+
+    # 登陆失败，尝试用session以及cookie解决
     with open('./Resrc/gushiwen.html', 'w', encoding='utf-8') as fp:
         fp.write(xml)
