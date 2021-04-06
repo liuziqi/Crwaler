@@ -16,6 +16,6 @@ if __name__ == "__main__":
     }
     response = requests.get(url=url, params=params, headers=headers)
     data = response.json()
-    fp = open("./douban.json", 'w', encoding="utf-8")
+    fp = open("Resrc/douban.json", 'w', encoding="utf-8")
     json.dump(data, fp=fp, ensure_ascii=False)
     print("finish!")

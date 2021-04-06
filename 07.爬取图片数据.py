@@ -11,7 +11,7 @@ if __name__ == "__main__":
     img = requests.get(url=url, headers=headers).content
 
     # wb写入二进制数据
-    with open("./wallpaper.jpg", "wb") as fp:
+    with open("Resrc/wallpaper.jpg", "wb") as fp:
         fp.write(img)
 
     print("finish!")

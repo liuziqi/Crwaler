@@ -44,7 +44,7 @@ if __name__ == "__main__":
     print(len(info))
 
     # 持久化存储
-    with open("./yjzj_data.json", "w", encoding="utf-8") as fp:
+    with open("Resrc/yjzj_data.json", "w", encoding="utf-8") as fp:
         # ensure_ascii=False，否则会保存成ascii码
         json.dump(info, fp=fp, ensure_ascii=False)
 
